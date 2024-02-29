@@ -1,13 +1,15 @@
 import React from 'react'
 import Header from '../components/Header/Header'
 
-type Props = {}
+type Props = {
+  children: React.ReactNode
+}
 
-const Layout = (props: Props) => {
+const Layout = ({ children }: Props) => {
   return (
     <div className="flex flex-col min-h-screen">
         <Header/>
-        <div className='container mx-auto'></div>
+        <div className='container mx-auto'>{children}</div>
     </div>
   )
 }

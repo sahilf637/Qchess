@@ -6,18 +6,18 @@ import { GenerateToken } from "../Util/app-util";
 const sendCookies = async (res: Response, email: string) => {
     const token = await GenerateToken({ Email: email })
 
-        const cookieOptions = {
-            expire: new Date( Date.now() + 7*24*60*60),
-            httpOnly: false,
-            secure: false 
-        }
+    const cookieOptions = {
+        maxAge: 7 * 24 * 60 * 60,
+        httpOnly: true,
+        secure: false,
+        sameSite: "none" as const
+    }
 
-        res.cookie("jwt", token, cookieOptions)
+    res.cookie("jwt", token, cookieOptions)
 }
 
 const signUpUser = async (req: Request, res: Response) => {
     try {
-
         const email = req.body.Email;
         const user = await User.findOne({ Email: email })
 
@@ -27,7 +27,7 @@ const signUpUser = async (req: Request, res: Response) => {
 
         const Salt = await GenerateSalt()
 
-        const newPassword = await GeneratePassword(req.body.Password, Salt) 
+        const newPassword = await GeneratePassword(req.body.Password, Salt)
 
         const body = {
             FirstName: req.body.FirstName,
@@ -35,7 +35,7 @@ const signUpUser = async (req: Request, res: Response) => {
             Email: email,
             Password: newPassword,
             Salt: Salt
-        }   
+        }
 
         await sendCookies(res, email)
 
@@ -44,7 +44,9 @@ const signUpUser = async (req: Request, res: Response) => {
         await newUser.save();
 
         res.status(200).json({
-            newUser
+            Email: email,
+            FirstName: body.FirstName,
+            LastName: body.LastName
         })
     } catch (error) {
         console.log(error);
@@ -58,20 +60,22 @@ const signInUser = async (req: Request, res: Response) => {
     try {
         const email = req.body.Email;
         const enteredPassword = req.body.Password
-        const user = await User.findOne({ Email: email }) 
+        const user = await User.findOne({ Email: email })
 
-        if(!user){
+        if (!user) {
             throw new Error("User Not Found")
         }
-        
-        if(!ValidatePassword(enteredPassword, user.Password, user.Salt as string)){
+
+        if (!ValidatePassword(enteredPassword, user.Password, user.Salt as string)) {
             throw new Error("InCorrect Password")
         }
 
         await sendCookies(res, email)
 
         res.status(200).json({
-            user
+            Email: email,
+            FirstName: user.FirstName,
+            LastName: user.LastName
         })
     } catch (error: any) {
         res.status(500).json(
