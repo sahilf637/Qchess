@@ -3,7 +3,7 @@ import cors from "cors"
 import "dotenv/config"
 import mongoose from "mongoose"
 import userRouter from "./Router/UserRouter"
-import cookieParser from "cookie-parser"
+import morgan from "morgan"
 
 const app = express()
 
@@ -13,11 +13,16 @@ mongoose.connect(process.env.URL as string).then(() => {
 
 app.use(express.json())
 
-app.use(cookieParser())
+app.use(morgan("dev"))
 
 app.use(cors({
-    credentials: true
+    credentials: true,
+    origin: true
 }))
+
+app.get("/", (req, res) => {
+    res.send("Request accepted")
+})
 
 app.use("/api/my/user" ,userRouter)
 

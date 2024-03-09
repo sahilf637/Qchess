@@ -2,18 +2,27 @@ import { Request, Response, NextFunction } from "express";
 import User from "../Model/User";
 import { GeneratePassword, GenerateSalt, ValidatePassword } from "../Util/app-util";
 import { GenerateToken } from "../Util/app-util";
+import { v4 as uuidv4 } from "uuid"
+import client from "../Sessions/store";
 
-const sendCookies = async (res: Response, email: string) => {
-    const token = await GenerateToken({ Email: email })
+// const sendCookies = async (res: Response, email: string) => {
+//     const token = await GenerateToken({ Email: email })
 
-    const cookieOptions = {
-        maxAge: 7 * 24 * 60 * 60,
-        httpOnly: true,
-        secure: false,
-        sameSite: "none" as const
-    }
+//     const cookieOptions = {
+//         expires:new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) ,
+//         httpOnly: true,
+//         secure: true,
+//         sameSite: "none" as const
+//     }
 
-    res.cookie("jwt", token, cookieOptions)
+//     res.cookie("jwt", token, cookieOptions)
+// }
+const generateSession = async (email: string) => {
+    const sessionId = uuidv4();
+
+    (await client).setEx(sessionId, 7 * 24 * 60 * 60, email)
+
+    return sessionId
 }
 
 const signUpUser = async (req: Request, res: Response) => {
@@ -37,7 +46,7 @@ const signUpUser = async (req: Request, res: Response) => {
             Salt: Salt
         }
 
-        await sendCookies(res, email)
+        const sessionID = await generateSession(email);
 
         const newUser = new User(body)
 
@@ -45,8 +54,7 @@ const signUpUser = async (req: Request, res: Response) => {
 
         res.status(200).json({
             Email: email,
-            FirstName: body.FirstName,
-            LastName: body.LastName
+            sessionID
         })
     } catch (error) {
         console.log(error);
@@ -70,12 +78,12 @@ const signInUser = async (req: Request, res: Response) => {
             throw new Error("InCorrect Password")
         }
 
-        await sendCookies(res, email)
+        const sessionID = await generateSession(email);
+
 
         res.status(200).json({
             Email: email,
-            FirstName: user.FirstName,
-            LastName: user.LastName
+            sessionID
         })
     } catch (error: any) {
         res.status(500).json(

@@ -3,8 +3,11 @@ import { useRef } from "react";
 import Button from "../components/UI/Button";
 import Input from "../components/Input";
 import { useNavigate } from "react-router-dom";
+import { signUser } from "../store/action.";
+import { useAuthDispatch } from "../store/auth-context";
 
 const Signup = () => {
+  const dispatch = useAuthDispatch()
   const Fname = useRef<HTMLInputElement>(null);
   const Lname = useRef<HTMLInputElement>(null);
   const Email = useRef<HTMLInputElement>(null);
@@ -14,6 +17,8 @@ const Signup = () => {
   const navigate = useNavigate()
   const onSignUpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+
     const body = {
       FirstName: Fname.current?.value,
       LastName: Lname.current?.value,
@@ -21,20 +26,20 @@ const Signup = () => {
       Password: Password.current?.value,
     };
     
-    const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/my/user/signUp`, {
-      method:"POST",
-      headers: {
-        'content-Type': 'application/json'
-      },
-      body: JSON.stringify(body),
-    })
+    const Payload = {
+      data: body,
+      type: 'signUp'
+    }
 
-    const data = await response.json();
+    try {
+      let response = await signUser(dispatch, Payload)
 
-    console.log(data);
-    
-    if(response.ok){
-      navigate("/")
+      if(response.data){
+        navigate("/");
+      }
+      return;
+    } catch (error) {
+      console.log(error);
     }
   };
   return (

@@ -1,21 +1,38 @@
 import React from "react";
 import Button from "../UI/Button";
 import { useNavigate } from "react-router-dom";
+import { useAuthState, useAuthDispatch } from "../../store/auth-context";
+import { logOut } from "../../store/action.";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
+  const { isAuthenticated, Email } = useAuthState();
+  // console.log(isAuthenticated, Email);
+  
+  const dispatch = useAuthDispatch()
   const navigate = useNavigate();
   const onSignUpHandler = () => {
-    navigate("/signUp")
-  }
+    navigate("/signUp");
+  };
   const onSignInHandler = () => {
-    navigate("/Signin")
+    navigate("/Signin");
+  };
+  const onSignOut = () => {
+    logOut(dispatch)
   }
   return (
     <>
-      <Button onClickHandler={onSignInHandler}>Login</Button>
-      <Button onClickHandler={onSignUpHandler}>Signup</Button>
+      {!isAuthenticated ? (
+        <div>
+          <Button onClickHandler={onSignInHandler}>Login</Button>
+          <Button onClickHandler={onSignUpHandler}>Signup</Button>
+        </div>
+      ) : (
+        <div>
+          <Button onClickHandler={onSignOut}>LogOut</Button>
+        </div>
+      )}
     </>
   );
 };

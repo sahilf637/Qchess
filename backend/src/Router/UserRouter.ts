@@ -6,6 +6,6 @@ const UserRouter = Router();
 
 UserRouter.post("/signUp", userController.signUpUser)
 UserRouter.post("/signIn", userController.signInUser)
-UserRouter.get("/", protect, userController.sendhello)
+UserRouter.get("/check", userController.sendhello)
 
 export default UserRouter
