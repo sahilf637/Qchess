@@ -1,23 +1,22 @@
 import React from "react";
 import { useRef } from "react";
 import Button from "../components/UI/Button";
-import Input from "../components/Input";
+import Input from "../components/UI/Input";
 import { useNavigate } from "react-router-dom";
-import { signUser } from "../store/action.";
-import { useAuthDispatch } from "../store/auth-context";
+import { signUser } from "../store/auth/action.";
+import { useAuthDispatch } from "../store/auth/auth-context";
 
 const Signup = () => {
-  const dispatch = useAuthDispatch()
+  const dispatch = useAuthDispatch();
   const Fname = useRef<HTMLInputElement>(null);
   const Lname = useRef<HTMLInputElement>(null);
   const Email = useRef<HTMLInputElement>(null);
   const Password = useRef<HTMLInputElement>(null);
   const Rpassword = useRef<HTMLInputElement>(null);
-  
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
   const onSignUpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
 
     const body = {
       FirstName: Fname.current?.value,
@@ -25,16 +24,16 @@ const Signup = () => {
       Email: Email.current?.value,
       Password: Password.current?.value,
     };
-    
+
     const Payload = {
       data: body,
-      type: 'signUp'
-    }
+      type: "signUp",
+    };
 
     try {
-      let response = await signUser(dispatch, Payload)
+      let response = await signUser(dispatch, Payload);
 
-      if(response.data){
+      if (response.data) {
         navigate("/");
       }
       return;

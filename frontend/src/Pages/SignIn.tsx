@@ -1,35 +1,34 @@
 import React from "react";
 import { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from "../components/Input";
+import Input from "../components/UI/Input";
 import Button from "../components/UI/Button";
-import { signUser } from "../store/action.";
-import { useAuthDispatch, useAuthState } from "../store/auth-context";
+import { signUser } from "../store/auth/action.";
+import { useAuthDispatch, useAuthState } from "../store/auth/auth-context";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useAuthDispatch();
-  const { loading } = useAuthState()
+  const { loading } = useAuthState();
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const onFormSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    
     const Email = email.current?.value;
     const Password = password.current?.value;
 
     const Payload = {
       data: {
         Email,
-        Password, 
-      }, 
-      type: 'signIn'
+        Password,
+      },
+      type: "signIn",
     };
 
     try {
       await signUser(dispatch, Payload);
-      navigate("/")
+      navigate("/");
       return;
     } catch (error) {
       console.log(error);
