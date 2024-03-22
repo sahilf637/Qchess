@@ -1,72 +1,264 @@
 export const initial_Tiles = {
     //white
-    '1a': true,
-    '1b': true,
-    '1c': true,
-    '1d': true,
-    '1e': true,
-    '1f': true,
-    '1g': true,
-    '1h': true,
-    '2a': true,
-    '2b': true,
-    '2c': true,
-    '2d': true,
-    '2e': true,
-    '2f': true,
-    '2g': true,
-    '2h': true,
+    '1a': {
+        has: true,
+        type: "wa_rook"
+    },
+    '1b': {
+        has: true,
+        type: "wb_knight"
+    },
+    '1c': {
+        has: true,
+        type: "wc_bishop"
+    },
+    '1d': {
+        has: true,
+        type: "wd_queen"
+    },
+    '1e': {
+        has: true,
+        type: "we_king"
+    },
+    '1f': {
+        has: true,
+        type: "wf_bishop"
+    },
+    '1g': {
+        has: true,
+        type: "wg_knight"
+    },
+    '1h': {
+        has: true,
+        type: "wh_rook"
+    },
+    '2a': {
+        has: true,
+        type: "wa_pawn"
+    },
+    '2b': {
+        has: true,
+        type: "wb_pawn"
+    },
+    '2c': {
+        has: true,
+        type: "wc_pawn"
+    },
+    '2d': {
+        has: true,
+        type: "wd_pawn"
+    },
+    '2e': {
+        has: true,
+        type: "we_pawn"
+    },
+    '2f': {
+        has: true,
+        type: "wf_pawn"
+    },
+    '2g': {
+        has: true,
+        type: "wg_pawn"
+    },
+    '2h': {
+        has: true,
+        type: "wh_pawn"
+    },
 
     //black
-    '7a': true,
-    '7b': true,
-    '7c': true,
-    '7d': true,
-    '7e': true,
-    '7f': true,
-    '7g': true,
-    '7h': true,
-    '8a': true,
-    '8b': true,
-    '8c': true,
-    '8d': true,
-    '8e': true,
-    '8f': true,
-    '8g': true,
-    '8h': true,
+    '7a': {
+        has: true,
+        type: "ba_rook"
+    },
+    '7b': {
+        has: true,
+        type: "bb_knight"
+    },
+    '7c': {
+        has: true,
+        type: "bc_bishop"
+    },
+    '7d': {
+        has: true,
+        type: "bd_queen"
+    },
+    '7e': {
+        has: true,
+        type: "be_king"
+    },
+    '7f': {
+        has: true,
+        type: "bf_bishop"
+    },
+    '7g': {
+        has: true,
+        type: "bg_knight"
+    },
+    '7h': {
+        has: true,
+        type: "bh_rook"
+    },
+    '8a': {
+        has: true,
+        type: "ba_pawn"
+    },
+    '8b': {
+        has: true,
+        type: "bb_pawn"
+    },
+    '8c': {
+        has: true,
+        type: "bc_pawn"
+    },
+    '8d': {
+        has: true,
+        type: "bd_pawn"
+    },
+    '8e': {
+        has: true,
+        type: "be_pawn"
+    },
+    '8f': {
+        has: true,
+        type: "bf_pawn"
+    },
+    '8g': {
+        has: true,
+        type: "bg_pawn"
+    },
+    '8h': {
+        has: true,
+        type: "bh_pawn"
+    },
 
     //unoccupied
-    '3a': false,
-    '3b': false,
-    '3c': false,
-    '3d': false,
-    '3e': false,
-    '3f': false,
-    '3g': false,
-    '3h': false,
-    '4a': false,
-    '4b': false,
-    '4c': false,
-    '4d': false,
-    '4e': false,
-    '4f': false,
-    '4g': false,
-    '4h': false,
+    '3a': {
+        has: false,
+        type: "none"
+    },
+    '3b': {
+        has: false,
+        type: "none"
+    },
+    '3c': {
+        has: false,
+        type: "none"
+    },
+    '3d': {
+        has: false,
+        type: "none"
+    },
+    '3e': {
+        has: false,
+        type: "none"
+    },
+    '3f': {
+        has: false,
+        type: "none"
+    },
+    '3g': {
+        has: false,
+        type: "none"
+    },
+    '3h': {
+        has: false,
+        type: "none"
+    },
+    '4a': {
+        has: false,
+        type: "none"
+    },
+    '4b': {
+        has: false,
+        type: "none"
+    },
+    '4c': {
+        has: false,
+        type: "none"
+    },
+    '4d': {
+        has: false,
+        type: "none"
+    },
+    '4e': {
+        has: false,
+        type: "none"
+    },
+    '4f': {
+        has: false,
+        type: "none"
+    },
+    '4g': {
+        has: false,
+        type: "none"
+    },
+    '4h': {
+        has: false,
+        type: "none"
+    },
 
-    '5a': false,
-    '5b': false,
-    '5c': false,
-    '5d': false,
-    '5e': false,
-    '5f': false,
-    '5g': false,
-    '5h': false,
-    '6a': false,
-    '6b': false,
-    '6c': false,
-    '6d': false,
-    '6e': false,
-    '6f': false,
-    '6g': false,
-    '6h': false,
+    '5a': {
+        has: false,
+        type: "none"
+    },
+    '5b': {
+        has: false,
+        type: "none"
+    },
+    '5c': {
+        has: false,
+        type: "none"
+    },
+    '5d': {
+        has: false,
+        type: "none"
+    },
+    '5e': {
+        has: false,
+        type: "none"
+    },
+    '5f': {
+        has: false,
+        type: "none"
+    },
+    '5g': {
+        has: false,
+        type: "none"
+    },
+    '5h': {
+        has: false,
+        type: "none"
+    },
+    '6a': {
+        has: false,
+        type: "none"
+    },
+    '6b': {
+        has: false,
+        type: "none"
+    },
+    '6c': {
+        has: false,
+        type: "none"
+    },
+    '6d': {
+        has: false,
+        type: "none"
+    },
+    '6e': {
+        has: false,
+        type: "none"
+    },
+    '6f': {
+        has: false,
+        type: "none"
+    },
+    '6g': {
+        has: false,
+        type: "none"
+    },
+    '6h': {
+        has: false,
+        type: "none"
+    },
 }

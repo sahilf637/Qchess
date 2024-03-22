@@ -2,6 +2,7 @@ import { images } from "./Images"
 import { Position } from "../Model/Position";
 import { Piece } from "../Model/Piece";
 import { piecesType, Player } from "./Type";
+import { Pawn } from "../Model/Pawn";
 
 interface initial_pieces {
     [key: string]: string
@@ -78,7 +79,14 @@ for (const key in initial_pieces) {
         let img = images[key]
         let team = (key.startsWith('w')) ? Player.White : Player.Black
 
-        let newPiece = new Piece(type, id, img, position, team);
+        let newPiece;
+
+        if(type === piecesType.pawn){
+            newPiece = new Pawn(type, id, img, position, team)
+        }
+        else{
+            newPiece = new Piece(type, id, img, position, team);
+        }
 
         pieces[key] = newPiece
     }

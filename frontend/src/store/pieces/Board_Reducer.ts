@@ -12,10 +12,13 @@ export const reducer = (state: any, action: any) => {
             return {
                 ...state
             }
-        case 'MOVE_PIECE':
+        case 'SET_BOARDSTATE':
             return {
-                ...state,
-                
+                ...action.Payload
+            }
+        case 'SET_POSSIBLE_MOVES':
+            return {
+                ...action.Payload
             }
     }
 }

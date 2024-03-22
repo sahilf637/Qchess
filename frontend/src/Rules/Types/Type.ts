@@ -4,7 +4,8 @@ export enum piecesType {
     rook = 'rook',
     bishop = 'bishop',
     queen = 'queen',
-    king = 'king'
+    king = 'king',
+    none = 'none'
 }
 
 export enum Player {
