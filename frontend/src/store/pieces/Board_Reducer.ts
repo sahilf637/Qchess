@@ -20,5 +20,9 @@ export const reducer = (state: any, action: any) => {
             return {
                 ...action.Payload
             }
+        case 'MOVE_PIECE':
+            return {
+                ...action.Payload
+            }
     }
 }

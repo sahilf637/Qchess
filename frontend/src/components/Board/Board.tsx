@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { setPieces , findMoves} from "../../store/pieces/action";
+import { setPieces , findMoves, movePiece} from "../../store/pieces/action";
 import { useReducer } from "react";
 import { reducer, newBoard } from "../../store/pieces/Board_Reducer";
 
@@ -16,29 +16,15 @@ const Board = (props: Props) => {
 
   const board: Array<React.ReactNode> = [];
 
-  const movePiece = (id: string) => {
-    let type = boardState.places[isSelected].type
-    let possible = boardState.pieces[type].possible_moves
-    if(possible.includes(id)){
-      const element1 = document.getElementById(isSelected)
-      let img = new DOMParser().parseFromString(element1?.innerHTML as string, 'text/html')
-      // console.log(img.body.firstChild);
-      const element2 = document.getElementById(id)
-      element1?.removeChild(element1.firstChild as Node)
-      element2?.appendChild(img.body.firstChild as Node)
-    }
-    else{
-      return;
-    }
-  }
+  // const movePiece = (id: string) => {
+  
+  //   else{
+  //     return;
+  //   }
+  // }
 
   const onClickHandler = (e: React.MouseEvent<HTMLSpanElement>) => {
     let id = e.currentTarget.id
-    console.log(isSelected);
-    
-    if(!id){
-      setisSelected("")
-    }
     if(isSelected.length === 0 && boardState.places[id]){
       setisSelected(id)
       let Payload = {
@@ -46,9 +32,13 @@ const Board = (props: Props) => {
         id: id,
       }
       findMoves(dispatch, Payload)
-    }else if(!boardState.places[id].has){
-
-      movePiece(id)
+    }else{
+      let Payload = {
+        boardState,
+        moveTo: id,
+        moveFrom : isSelected
+      }
+      movePiece(dispatch, Payload);
       setisSelected("")
     }
   }

@@ -66,67 +66,67 @@ export const initial_Tiles = {
     },
 
     //black
-    '7a': {
+    '8a': {
         has: true,
         type: "ba_rook"
     },
-    '7b': {
+    '8b': {
         has: true,
         type: "bb_knight"
     },
-    '7c': {
+    '8c': {
         has: true,
         type: "bc_bishop"
     },
-    '7d': {
+    '8d': {
         has: true,
         type: "bd_queen"
     },
-    '7e': {
+    '8e': {
         has: true,
         type: "be_king"
     },
-    '7f': {
+    '8f': {
         has: true,
         type: "bf_bishop"
     },
-    '7g': {
+    '8g': {
         has: true,
         type: "bg_knight"
     },
-    '7h': {
+    '8h': {
         has: true,
         type: "bh_rook"
     },
-    '8a': {
+    '7a': {
         has: true,
         type: "ba_pawn"
     },
-    '8b': {
+    '7b': {
         has: true,
         type: "bb_pawn"
     },
-    '8c': {
+    '7c': {
         has: true,
         type: "bc_pawn"
     },
-    '8d': {
+    '7d': {
         has: true,
         type: "bd_pawn"
     },
-    '8e': {
+    '7e': {
         has: true,
         type: "be_pawn"
     },
-    '8f': {
+    '7f': {
         has: true,
         type: "bf_pawn"
     },
-    '8g': {
+    '7g': {
         has: true,
         type: "bg_pawn"
     },
-    '8h': {
+    '7h': {
         has: true,
         type: "bh_pawn"
     },
